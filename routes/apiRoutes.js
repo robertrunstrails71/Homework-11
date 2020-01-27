@@ -33,3 +33,13 @@ module.exports = function(app) {
         writeDB(db);
         res.json(newNote);
   });
+
+  
+   app.delete("/api/notes/:id", function(req, res) {
+       const deletedNoteID = req.params.id;
+        const deletedNote = db.splice(deletedNoteID-1, 1);
+        db = reindexDB(db);
+        writeDB(db);
+        res.json(deletedNote);
+  });
+};
