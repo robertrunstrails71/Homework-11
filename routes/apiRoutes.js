@@ -23,3 +23,13 @@ module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
     res.json(db);
   });
+
+ 
+  app.post("/api/notes", function(req, res) {
+   
+    const newNote = req.body;
+        db.push(newNote);
+        db = reindexDB(db);
+        writeDB(db);
+        res.json(newNote);
+  });
