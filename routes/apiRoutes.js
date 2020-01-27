@@ -1,4 +1,3 @@
-
 let db = require("../db/db.json");
 const fs = require('fs');
 
@@ -19,15 +18,12 @@ function writeDB(dbArray){
 }
 
 module.exports = function(app) {
-  
-  app.get("/api/notes", function(req, res) {
+    app.get("/api/notes", function(req, res) {
     res.json(db);
   });
 
- 
-  app.post("/api/notes", function(req, res) {
-   
-    const newNote = req.body;
+    app.post("/api/notes", function(req, res) {
+        const newNote = req.body;
         db.push(newNote);
         db = reindexDB(db);
         writeDB(db);
@@ -35,8 +31,8 @@ module.exports = function(app) {
   });
 
   
-   app.delete("/api/notes/:id", function(req, res) {
-       const deletedNoteID = req.params.id;
+  app.delete("/api/notes/:id", function(req, res) {
+        const deletedNoteID = req.params.id;
         const deletedNote = db.splice(deletedNoteID-1, 1);
         db = reindexDB(db);
         writeDB(db);
